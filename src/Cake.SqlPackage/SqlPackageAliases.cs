@@ -1,6 +1,6 @@
-﻿using Cake.Core;
+﻿using System;
+using Cake.Core;
 using Cake.Core.Annotations;
-using System;
 using Cake.Core.IO;
 
 namespace Cake.SqlPackage
@@ -14,7 +14,7 @@ namespace Cake.SqlPackage
     /// </code>
     /// </para>
     /// </summary>
-    [CakeAliasCategory("SqlPackage")]
+    [CakeAliasCategory(nameof(SqlPackage))]
     public static class SqlPackageAliases
     {
         /// <summary>
@@ -33,7 +33,7 @@ namespace Cake.SqlPackage
         [CakeAliasCategory("Extract")]
         public static void SqlPackageExtract(this ICakeContext context, SqlPackageExtractSettings settings)
         {
-            SqlPackageExtract(context, settings, null);
+            SqlPackageExtract(context, settings, processSettings: null);
         }
 
         /// <summary>
@@ -86,7 +86,7 @@ namespace Cake.SqlPackage
         /// </example>
         [CakeMethodAlias]
         [CakeAliasCategory("Extract")]
-        public static void SqlPackageExtract(this ICakeContext context, SqlPackageExtractSettings settings, ProcessSettings processSettings)
+        public static void SqlPackageExtract(this ICakeContext context, SqlPackageExtractSettings? settings, ProcessSettings? processSettings)
         {
             if (context == null)
             {
@@ -113,7 +113,7 @@ namespace Cake.SqlPackage
         [CakeAliasCategory("Publish")]
         public static void SqlPackagePublish(this ICakeContext context, SqlPackagePublishSettings settings)
         {
-            SqlPackagePublish(context, settings, null);
+            SqlPackagePublish(context, settings, processSettings: null);
         }
 
         /// <summary>
@@ -156,7 +156,7 @@ namespace Cake.SqlPackage
         /// </summary>
         /// <param name="context">The context.</param>
         /// <param name="settings">The settings.</param>
-        /// <param name="processSettings">The ProcessSettings for SqlPackage</param>
+        /// <param name="processSettings">The ProcessSettings for SqlPackage.</param>
         /// <example>
         ///   <code>
         ///     var settings = new SqlPackagePublishSettings();
@@ -167,7 +167,7 @@ namespace Cake.SqlPackage
         /// </example>
         [CakeMethodAlias]
         [CakeAliasCategory("Publish")]
-        public static void SqlPackagePublish(this ICakeContext context, SqlPackagePublishSettings settings, ProcessSettings processSettings)
+        public static void SqlPackagePublish(this ICakeContext context, SqlPackagePublishSettings? settings, ProcessSettings? processSettings)
         {
             if (context == null)
             {
@@ -199,7 +199,7 @@ namespace Cake.SqlPackage
         [CakeAliasCategory("Export")]
         public static void SqlPackageExport(this ICakeContext context, SqlPackageExportSettings settings)
         {
-            SqlPackageExport(context, settings, null);
+            SqlPackageExport(context, settings, processSettings: null);
         }
 
         /// <summary>
@@ -259,7 +259,7 @@ namespace Cake.SqlPackage
         /// </example>
         [CakeMethodAlias]
         [CakeAliasCategory("Export")]
-        public static void SqlPackageExport(this ICakeContext context, SqlPackageExportSettings settings, ProcessSettings processSettings)
+        public static void SqlPackageExport(this ICakeContext context, SqlPackageExportSettings? settings, ProcessSettings? processSettings)
         {
             if (context == null)
             {
@@ -271,7 +271,7 @@ namespace Cake.SqlPackage
         }
 
         /// <summary>
-        /// Imports the schema and table data from a BACPAC package into a new user database
+        /// Imports the schema and table data from a BACPAC package into a new user database.
         /// </summary>
         /// <param name="context">The context.</param>
         /// <param name="settings">The settings.</param>
@@ -290,11 +290,11 @@ namespace Cake.SqlPackage
         [CakeAliasCategory("Import")]
         public static void SqlPackageImport(this ICakeContext context, SqlPackageImportSettings settings)
         {
-            SqlPackageImport(context, settings, null);
+            SqlPackageImport(context, settings, processSettings: null);
         }
 
         /// <summary>
-        /// Imports the schema and table data from a BACPAC package into a new user database
+        /// Imports the schema and table data from a BACPAC package into a new user database.
         /// </summary>
         /// <param name="context">The context.</param>
         /// <param name="configurationAction">The configuration action.</param>
@@ -329,7 +329,7 @@ namespace Cake.SqlPackage
         }
 
         /// <summary>
-        /// Imports the schema and table data from a BACPAC package into a new user database
+        /// Imports the schema and table data from a BACPAC package into a new user database.
         /// </summary>
         /// <param name="context">The context.</param>
         /// <param name="settings">The settings.</param>
@@ -348,7 +348,7 @@ namespace Cake.SqlPackage
         /// </example>
         [CakeMethodAlias]
         [CakeAliasCategory("Import")]
-        public static void SqlPackageImport(this ICakeContext context, SqlPackageImportSettings settings, ProcessSettings processSettings)
+        public static void SqlPackageImport(this ICakeContext context, SqlPackageImportSettings? settings, ProcessSettings? processSettings)
         {
             if (context == null)
             {
@@ -375,7 +375,7 @@ namespace Cake.SqlPackage
         [CakeAliasCategory("DeployReport")]
         public static void SqlPackageDeployReport(this ICakeContext context, SqlPackageDeployReportSettings settings)
         {
-            SqlPackageDeployReport(context, settings, null);
+            SqlPackageDeployReport(context, settings, processSettings: null);
         }
 
         /// <summary>
@@ -428,7 +428,7 @@ namespace Cake.SqlPackage
         /// </example>
         [CakeMethodAlias]
         [CakeAliasCategory("DeployReport")]
-        public static void SqlPackageDeployReport(this ICakeContext context, SqlPackageDeployReportSettings settings, ProcessSettings processSettings)
+        public static void SqlPackageDeployReport(this ICakeContext context, SqlPackageDeployReportSettings? settings, ProcessSettings? processSettings)
         {
             if (context == null)
             {
@@ -455,7 +455,7 @@ namespace Cake.SqlPackage
         [CakeAliasCategory("DriftReport")]
         public static void SqlPackageDriftReport(this ICakeContext context, SqlPackageDriftReportSettings settings)
         {
-            SqlPackageDriftReport(context, settings, null);
+            SqlPackageDriftReport(context, settings, processSettings: null);
         }
 
         /// <summary>
@@ -508,7 +508,7 @@ namespace Cake.SqlPackage
         /// </example>
         [CakeMethodAlias]
         [CakeAliasCategory("DriftReport")]
-        public static void SqlPackageDriftReport(this ICakeContext context, SqlPackageDriftReportSettings settings, ProcessSettings processSettings)
+        public static void SqlPackageDriftReport(this ICakeContext context, SqlPackageDriftReportSettings? settings, ProcessSettings? processSettings)
         {
             if (context == null)
             {
@@ -518,7 +518,6 @@ namespace Cake.SqlPackage
             var runner = new SqlPackageDriftReportRunner(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             runner.Execute(settings ?? new SqlPackageDriftReportSettings(), processSettings);
         }
-
 
         /// <summary>
         /// Creates a Transact-SQL incremental update script that updates the schema of a target to match the schema of a source.
@@ -539,9 +538,9 @@ namespace Cake.SqlPackage
         /// </example>
         [CakeMethodAlias]
         [CakeAliasCategory("Script")]
-        public static void SqlPackageScript(this ICakeContext context, SqlPackageScriptSettings settings)
+        public static void SqlPackageScript(this ICakeContext context, SqlPackageScriptSettings? settings)
         {
-            SqlPackageScript(context, settings, null);
+            SqlPackageScript(context, settings, processSettings: null);
         }
 
         /// <summary>
@@ -601,7 +600,7 @@ namespace Cake.SqlPackage
         /// </example>
         [CakeMethodAlias]
         [CakeAliasCategory("Script")]
-        public static void SqlPackageScript(this ICakeContext context, SqlPackageScriptSettings settings, ProcessSettings processSettings)
+        public static void SqlPackageScript(this ICakeContext context, SqlPackageScriptSettings? settings, ProcessSettings? processSettings)
         {
             if (context == null)
             {

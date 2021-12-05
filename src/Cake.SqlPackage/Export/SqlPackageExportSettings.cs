@@ -6,7 +6,7 @@
     public class SqlPackageExportSettings : SqlPackageSettings
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="SqlPackageExtractSettings"/> class.
+        /// Initializes a new instance of the <see cref="SqlPackageExportSettings"/> class.
         /// </summary>
         public SqlPackageExportSettings()
         {

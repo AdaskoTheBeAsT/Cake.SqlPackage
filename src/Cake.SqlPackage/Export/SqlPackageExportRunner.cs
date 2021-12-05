@@ -1,4 +1,6 @@
-﻿using Cake.Core;
+﻿using System.Globalization;
+
+using Cake.Core;
 using Cake.Core.IO;
 using Cake.Core.Tooling;
 
@@ -16,7 +18,8 @@ namespace Cake.SqlPackage
         /// <param name="environment">The environment.</param>
         /// <param name="processRunner">The process runner.</param>
         /// <param name="tools">The tools.</param>
-        public SqlPackageExportRunner(IFileSystem fileSystem,
+        public SqlPackageExportRunner(
+            IFileSystem fileSystem,
             ICakeEnvironment environment,
             IProcessRunner processRunner,
             IToolLocator tools)
@@ -71,7 +74,7 @@ namespace Cake.SqlPackage
 
                 if (settings.SourceTimeout > 0)
                 {
-                    builder.Append($"/{nameof(settings.SourceTimeout)}:{settings.SourceTimeout}");
+                    builder.Append($"/{nameof(settings.SourceTimeout)}:{settings.SourceTimeout.ToString(CultureInfo.InvariantCulture)}");
                 }
 
                 if (settings.SourceTrustServerCertificate.HasValue)

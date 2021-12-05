@@ -1,7 +1,7 @@
 namespace Cake.SqlPackage
 {
     /// <summary>
-    /// Enumeration for Azure key vault authentication method
+    /// Enumeration for Azure key vault authentication method.
     /// </summary>
     public enum AzureKeyVaultAuthMethod
     {
@@ -13,6 +13,6 @@ namespace Cake.SqlPackage
         /// <summary>
         /// Authentication using client shared secret.
         /// </summary>
-        ClientIdSecret = 1
+        ClientIdSecret = 1,
     }
 }

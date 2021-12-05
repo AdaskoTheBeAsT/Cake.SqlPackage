@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26430.16
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31919.166
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{FC602C31-A856-4936-82F8-A1CC9B853499}"
 EndProject
@@ -11,11 +11,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		build.ps1 = build.ps1
 		build.sh = build.sh
+		nuspec\nuget\Cake.SqlPackage.nuspec = nuspec\nuget\Cake.SqlPackage.nuspec
+		Directory.Build.props = Directory.Build.props
 		GitVersion.yml = GitVersion.yml
 		LICENSE = LICENSE
 		README.md = README.md
 		recipe.cake = recipe.cake
-		nuspec\nuget\Cake.SqlPackage.nuspec = nuspec\nuget\Cake.SqlPackage.nuspec
+		stylecop.json = stylecop.json
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cake.SqlPackage", "src\Cake.SqlPackage\Cake.SqlPackage.csproj", "{2FCEED7D-3CDC-4B24-8013-8058AAA0020A}"
@@ -43,5 +45,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{2FCEED7D-3CDC-4B24-8013-8058AAA0020A} = {FC602C31-A856-4936-82F8-A1CC9B853499}
 		{F78FCC29-F187-4E19-A8CC-147E7E858DE1} = {092C59BA-E86E-4394-B7D4-296E7AE7826D}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {04808246-C8BC-4294-BDF2-39C091C2B61D}
 	EndGlobalSection
 EndGlobal

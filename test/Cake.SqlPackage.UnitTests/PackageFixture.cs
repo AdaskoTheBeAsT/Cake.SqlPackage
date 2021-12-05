@@ -1,4 +1,6 @@
-﻿using Cake.Core.IO;
+﻿using System;
+
+using Cake.Core.IO;
 using Cake.Testing.Fixtures;
 
 namespace Cake.SqlPackage.UnitTests
@@ -6,12 +8,13 @@ namespace Cake.SqlPackage.UnitTests
     internal abstract class PackageFixture<TSettings> : ToolFixture<TSettings, ToolFixtureResult>
         where TSettings : SqlPackageSettings, new()
     {
-        public ProcessSettings ProcessSettings { get; set; }
-
-        protected PackageFixture() : base("SqlPackage.exe")
+        protected PackageFixture()
+            : base("SqlPackage.exe")
         {
-            ProcessRunner.Process.SetStandardOutput(new string[] { });
+            ProcessRunner.Process.SetStandardOutput(Array.Empty<string>());
         }
+
+        public ProcessSettings? ProcessSettings { get; set; }
 
         protected override ToolFixtureResult CreateResult(FilePath path, ProcessSettings process)
         {

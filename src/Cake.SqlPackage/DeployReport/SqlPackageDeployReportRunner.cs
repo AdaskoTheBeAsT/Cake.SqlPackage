@@ -1,4 +1,6 @@
-﻿using Cake.Core;
+﻿using System.Globalization;
+
+using Cake.Core;
 using Cake.Core.IO;
 using Cake.Core.Tooling;
 
@@ -78,7 +80,7 @@ namespace Cake.SqlPackage
 
                 if (settings.SourceTimeout > 0)
                 {
-                    builder.Append($"/{nameof(settings.SourceTimeout)}:{settings.SourceTimeout}");
+                    builder.Append($"/{nameof(settings.SourceTimeout)}:{settings.SourceTimeout.ToString(CultureInfo.InvariantCulture)}");
                 }
 
                 if (settings.SourceTrustServerCertificate.HasValue)
@@ -124,7 +126,7 @@ namespace Cake.SqlPackage
 
                 if (settings.TargetTimeout > 0)
                 {
-                    builder.Append($"/{nameof(settings.TargetTimeout)}:{settings.TargetTimeout}");
+                    builder.Append($"/{nameof(settings.TargetTimeout)}:{settings.TargetTimeout.ToString(CultureInfo.InvariantCulture)}");
                 }
 
                 if (settings.TargetTrustServerCertificate.HasValue)

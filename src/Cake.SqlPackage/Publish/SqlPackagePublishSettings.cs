@@ -14,18 +14,18 @@
         }
 
         /// <summary>
-        /// Specifies the Client Secret to be used in authenticating against Azure Key Vault.
+        /// Gets or sets the Client Secret to be used in authenticating against Azure Key Vault.
         /// </summary>
-        public string AzureSecret { get; set; }
+        public string? AzureSecret { get; set; }
 
         /// <summary>
-        /// Specifies what authentication method will be used for accessing Azure Key Vault.
+        /// Gets or sets what authentication method will be used for accessing Azure Key Vault.
         /// </summary>
         public AzureKeyVaultAuthMethod? AzureKeyVaultAuthMethod { get; set; }
 
         /// <summary>
-        /// Specifies the Client ID to be used in authenticating against Azure Key Vault.
+        /// Gets or sets the Client ID to be used in authenticating against Azure Key Vault.
         /// </summary>
-        public string ClientId { get; set; }
+        public string? ClientId { get; set; }
     }
 }

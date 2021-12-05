@@ -13,11 +13,25 @@ namespace Cake.SqlPackage
     /// <summary>
     /// SqlPackage tool execution.
     /// </summary>
+    /// <typeparam name="T"><see cref="SqlPackageSettings"/> type.</typeparam>
     internal abstract class SqlPackageRunner<T> : Tool<T>
         where T : SqlPackageSettings
     {
         /// <summary>
-        /// The Cake environment in context.
+        /// Initializes a new instance of the <see cref="SqlPackageRunner{T}" /> class.
+        /// </summary>
+        /// <param name="fileSystem">The file system.</param>
+        /// <param name="environment">The environment.</param>
+        /// <param name="processRunner">The process runner.</param>
+        /// <param name="tools">The tool locator.</param>
+        protected SqlPackageRunner(IFileSystem fileSystem, ICakeEnvironment environment, IProcessRunner processRunner, IToolLocator tools)
+            : base(fileSystem, environment, processRunner, tools)
+        {
+            Environment = environment;
+        }
+
+        /// <summary>
+        /// Gets or sets the Cake environment in context.
         /// </summary>
         public ICakeEnvironment Environment { get; set; }
 
@@ -26,14 +40,14 @@ namespace Cake.SqlPackage
         /// </summary>
         /// <param name="settings">The settings.</param>
         /// <param name="processSettings">The ProcessSettings for SqlPackage.</param>
-        public void Execute(T settings, ProcessSettings processSettings = null)
+        public void Execute(T settings, ProcessSettings? processSettings = null)
         {
             if (settings == null)
             {
                 throw new ArgumentNullException(nameof(settings));
             }
 
-            Run(settings, BuildArguments(settings), processSettings, null);
+            Run(settings, BuildArguments(settings), processSettings, postAction: null);
         }
 
         protected abstract ProcessArgumentBuilder BuildArguments(T settings);
@@ -42,7 +56,7 @@ namespace Cake.SqlPackage
         /// Builds the common SqlPackage arguments.
         /// </summary>
         /// <param name="settings">The settings.</param>
-        /// <returns></returns>
+        /// <returns><see cref="ProcessArgumentBuilder"/> instance.</returns>
         protected ProcessArgumentBuilder BuildSqlPackageArguments(T settings)
         {
             var properties = BuildProperties(settings);
@@ -64,7 +78,7 @@ namespace Cake.SqlPackage
                     break;
 
                 default:
-                    throw new ArgumentOutOfRangeException();
+                    throw new ArgumentOutOfRangeException(nameof(settings), "Invalid Action.");
             }
 
             return builder;
@@ -74,7 +88,7 @@ namespace Cake.SqlPackage
         /// Builds the <see cref="SqlPackageAction"/>.
         /// </summary>
         /// <param name="settings">The settings.</param>
-        /// <returns></returns>
+        /// <returns><see cref="ProcessArgumentBuilder"/> instance.</returns>
         protected ProcessArgumentBuilder CreateBuilder(T settings)
         {
             var builder = new ProcessArgumentBuilder();
@@ -90,7 +104,7 @@ namespace Cake.SqlPackage
         /// <returns>The name of the tool.</returns>
         protected override string GetToolName()
         {
-            return "SqlPackage";
+            return nameof(SqlPackage);
         }
 
         /// <summary>
@@ -99,7 +113,7 @@ namespace Cake.SqlPackage
         /// <returns>The tool executable name.</returns>
         protected override IEnumerable<string> GetToolExecutableNames()
         {
-            return new[] { "SqlPackage.exe" };
+            return new[] { "SqlPackage.exe", "sqlpackage" };
         }
 
         /// <summary>
@@ -107,8 +121,8 @@ namespace Cake.SqlPackage
         /// </summary>
         /// <param name="toCopy">To copy.</param>
         /// <param name="builder">The builder.</param>
-        /// <returns></returns>
-        protected ProcessArgumentBuilder CopyArgumentsTo(ProcessArgumentBuilder toCopy, ProcessArgumentBuilder builder = null)
+        /// <returns><see cref="ProcessArgumentBuilder"/> instance.</returns>
+        protected ProcessArgumentBuilder CopyArgumentsTo(ProcessArgumentBuilder toCopy, ProcessArgumentBuilder? builder = null)
         {
             if (builder == null)
             {
@@ -124,7 +138,7 @@ namespace Cake.SqlPackage
         {
             var builder = new ProcessArgumentBuilder();
 
-            if (settings.Variables.Any())
+            if (settings.Variables.Count > 0)
             {
                 foreach (var variable in settings.Variables)
                 {
@@ -139,7 +153,7 @@ namespace Cake.SqlPackage
         {
             var builder = new ProcessArgumentBuilder();
 
-            if (!settings.Properties.Any())
+            if (settings.Properties.Count == 0)
             {
                 return builder;
             }
@@ -150,19 +164,6 @@ namespace Cake.SqlPackage
             }
 
             return builder;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="T:Cake.Core.Tooling.Tool`1" /> class.
-        /// </summary>
-        /// <param name="fileSystem">The file system.</param>
-        /// <param name="environment">The environment.</param>
-        /// <param name="processRunner">The process runner.</param>
-        /// <param name="tools">The tool locator.</param>
-        protected SqlPackageRunner(IFileSystem fileSystem, ICakeEnvironment environment, IProcessRunner processRunner, IToolLocator tools)
-        : base(fileSystem, environment, processRunner, tools)
-        {
-            Environment = environment;
         }
     }
 }

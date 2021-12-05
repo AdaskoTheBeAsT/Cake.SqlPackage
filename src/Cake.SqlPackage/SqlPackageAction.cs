@@ -38,6 +38,6 @@ namespace Cake.SqlPackage
         /// <summary>
         /// Imports the schema and table data from a BACPAC package into a new user database.
         /// </summary>
-        Import = 6
+        Import = 6,
     }
 }
